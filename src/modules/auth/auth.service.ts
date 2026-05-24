@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import User from './auth.schema';
+import { jwt } from 'zod';
 
 interface RegisterUserData {
   name: string;
@@ -39,5 +40,22 @@ export const loginUser = async (userData: LoginUserData) => {
   if(!isPasswordMatched) {
     throw new Error('Password does not match');
   }
-    return user;
-}
+
+  const token = jwt.sign(
+    {
+      id: user._id,
+      email: user.email,
+      role: user.role
+    },
+  
+    process.env.JWT_SECRET as string,
+    {
+      expiresIn: '7d'
+    }
+  );
+    
+    return{
+      token,
+      user
+    };
+};
