@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import User from './auth.schema';
 
 interface RegisterUserData {
@@ -7,7 +8,11 @@ interface RegisterUserData {
 }
 
 export const registerUser = async (userData: RegisterUserData) => {
-  const user = await User.create(userData);
+  const hashedPassword = await bcrypt.hash(userData.password, 10);
+  const user = await User.create({
+    ...userData,
+    password: hashedPassword,
+  });
 
   return user;
 };
