@@ -12,10 +12,12 @@ const auth = (
     const token = req.headers.authorization;
 
     if (!token) {
+
       return res.status(401).json({
         success: false,
         message: 'Unauthorized Access'
       });
+
     }
 
     const decoded = jwt.verify(
@@ -23,7 +25,7 @@ const auth = (
       process.env.JWT_SECRET as string
     );
 
-    req.user = decoded;
+    (req as any).user = decoded;
 
     next();
 
