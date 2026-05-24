@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import User from './auth.schema';
-import { jwt } from 'zod';
+import jwt from 'jsonwebtoken';
 
 interface RegisterUserData {
   name: string;
