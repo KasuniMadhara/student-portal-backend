@@ -82,7 +82,7 @@ export const getUser = async (
 
     const { id } = req.params;
 
-    const user = await getSingleUser(id);
+    const user = await getSingleUser(id as string);
 
     res.status(200).json({
       success: true,
