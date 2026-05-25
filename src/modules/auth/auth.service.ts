@@ -66,3 +66,10 @@ export const getAllUsers = async () => {
 
   return users;
 };
+
+export const getSingleUser = async (id: string) => {
+
+  const user = await User.findById(id);
+
+  return user;
+};
