@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import {
+  getSingleUser,
   getAllUsers,
   loginUser,
   registerUser
@@ -67,6 +68,32 @@ export const getUsers = async (
     res.status(500).json({
       success: false,
       message: 'Failed to get users'
+    });
+
+  }
+};
+
+export const getUser = async (
+  req: Request,
+  res: Response
+) => {
+
+  try {
+
+    const { id } = req.params;
+
+    const user = await getSingleUser(id);
+
+    res.status(200).json({
+      success: true,
+      data: user
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get user'
     });
 
   }
