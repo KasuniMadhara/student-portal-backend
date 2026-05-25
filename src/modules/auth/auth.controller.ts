@@ -1,5 +1,9 @@
 import { Request, Response } from 'express';
-import { loginUser,registerUser } from './auth.service';
+import {
+  getAllUsers,
+  loginUser,
+  registerUser
+} from './auth.service';
 import { success } from 'zod';
 
 export const register = async (req: Request, res: Response) => {
@@ -39,6 +43,30 @@ export const login = async (req: Request, res: Response) => {
       success: false,
       message: 'Login failed',
       error
+    });
+
+  }
+};
+
+export const getUsers = async (
+  req: Request,
+  res: Response
+) => {
+
+  try {
+
+    const users = await getAllUsers();
+
+    res.status(200).json({
+      success: true,
+      data: users
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get users'
     });
 
   }
