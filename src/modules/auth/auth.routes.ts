@@ -1,14 +1,16 @@
 import express from 'express';
-import {getUsers, login, register } from './auth.controller';
+import {getUser, getUsers, login, register } from './auth.controller';
 import auth from '../../middlewares/auth.middleware';
 
 const router = express.Router();
 
-router.get('/users', auth, getUsers);
+router.get('/user/:id', auth,getUser); // Get single user by ID (Protected Route)
 
-router.post('/register', register);
+router.get('/users', auth, getUsers); // Get all users (Protected Route)
 
-router.post('/login', login);
+router.post('/register', register); // User registration route
+
+router.post('/login', login); // User login route
 
 router.get(
   '/profile',
