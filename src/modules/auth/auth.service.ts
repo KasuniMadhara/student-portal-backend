@@ -73,3 +73,19 @@ export const getSingleUser = async (id: string) => {
 
   return user;
 };
+
+export const updateUser = async (
+  id: string,
+  data: any
+) => {
+
+  const updatedUser = await User.findByIdAndUpdate(
+    id,
+    data,
+    {
+      new: true
+    }
+  );
+
+  return updatedUser;
+};
