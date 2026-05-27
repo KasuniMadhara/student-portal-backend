@@ -89,3 +89,12 @@ export const updateUser = async (
 
   return updatedUser;
 };
+
+export const deleteUser = async (
+  id: string
+) => {
+
+  const deletedUser = await User.findByIdAndDelete(id);
+
+  return deletedUser;
+};
