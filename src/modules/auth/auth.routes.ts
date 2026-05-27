@@ -1,8 +1,10 @@
 import express from 'express';
-import {updateSingleUser,getUser, getUsers, login, register } from './auth.controller';
+import {deleteSingleUser, updateSingleUser,getUser, getUsers, login, register } from './auth.controller';
 import auth from '../../middlewares/auth.middleware';
 
 const router = express.Router();
+
+router.delete('/user/:id', auth,deleteSingleUser); // Delete user by ID (Protected Route)
 
 router.patch('/users/:id', auth, updateSingleUser); // Update user by ID (Protected Route)
 
