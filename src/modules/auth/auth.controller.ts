@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import {
+  deleteUser,
   updateUser,
   getSingleUser,
   getAllUsers,
@@ -125,6 +126,35 @@ export const updateSingleUser = async (
     res.status(500).json({
       success: false,
       message: 'Failed to update user'
+    });
+
+  }
+};
+
+export const deleteSingleUser = async (
+  req: Request,
+  res: Response
+) => {
+
+  try {
+
+    const { id } = req.params;
+
+    const deletedUser = await deleteUser(
+      id as string,
+    );
+
+    res.status(200).json({
+      success: true,
+      message: 'User deleted successfully',
+      data: deletedUser
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: 'Failed to delete user'
     });
 
   }
